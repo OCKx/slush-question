@@ -1,0 +1,44 @@
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Investor {
+  id         String   @id @default(cuid())
+  name       String
+  answer     String   @db.Text
+  linkedin   String?
+  categories String[] @default([])
+  published  Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Startup {
+  id          String   @id @default(cuid())
+  name        String
+  company     String
+  description String   @db.Text
+  linkedin    String?
+  categories  String[] @default([])
+  published   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Builder {
+  id          String   @id @default(cuid())
+  name        String
+  project     String   @db.Text
+  linkedin    String?
+  categories  String[] @default([])
+  published   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
